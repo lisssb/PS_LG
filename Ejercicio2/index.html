@@ -1,0 +1,24 @@
+<!DOCTYPE>
+<html lang="es" ng-app="mainApp">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+  <script src="https://code.highcharts.com/highcharts.src.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+
+  <script src="app.js"></script>
+  <script src="serie-chart.component.js"></script>
+  <script src="pie-chart.component.js"></script>
+  <script src="series.factory.js"></script>
+  <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous"> -->
+</head>
+
+<body ng-controller="MainController as main">
+  <div>
+    <serie-chart serie="main.seriesDate"></serie-chart>
+    <pie-chart serie="main.serie"></pie-chart>
+  </div>
+
+
+</body>
+</html>
