@@ -5,8 +5,6 @@ angular.module('mainApp').component('serieChart', {
   },
   controller: function serieChartController() {
     var createChart = function(series){
-      var categories = series.categories;
-      var series = series.series;
       this.myChart = Highcharts.chart('container', {
 
         tooltip: {
@@ -22,7 +20,15 @@ angular.module('mainApp').component('serieChart', {
           align: 'right',
         },
         xAxis: {
-          categories: categories
+          type: 'datetime',
+          title: {
+            text: 'Fecha'
+          }
+        },
+        yAxis: {
+          title: {
+            text: "Valor"
+          }
         },
         series: series
       });

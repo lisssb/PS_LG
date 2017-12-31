@@ -19,32 +19,16 @@ angular.module('mainApp').factory('seriesCall', ['$http', '$q', function seriesC
       categoryList.forEach(function(category){
         var currentCat = seriesStructureAux[category] || [];
         var currentValue = categoryStructure[key][category] || 0;
-        currentCat.push(currentValue);
+        currentCat.push([Number(key), currentValue]);
         seriesStructureAux[category] = currentCat;
       });
     });
-
     seriesStructure = [];
     categoryList.forEach(function(cat){
       seriesStructure.push({name : cat, data : seriesStructureAux[cat]});
     });
   };
 
-
-  /**
-  gererate the categories text for the serieChart
-  **/
-  var generateSerieCategory = function(){
-    //Get dateCategories text
-    var monthNames = [
-      "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-      "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-    ];
-    dateStructure = dateStructure.map(function(currentDate){
-      currentDate = new Date(Number(currentDate));
-      return  currentDate.getDate() + " " + monthNames[currentDate.getMonth()];
-    });
-  };
 
   /**
   generate pie chart serie data
@@ -90,16 +74,16 @@ angular.module('mainApp').factory('seriesCall', ['$http', '$q', function seriesC
   var getSeriesData = function(){
     var serie1 = $http({
       url: "http://s3.amazonaws.com/logtrust-static/test/test/data1.json",
-      method: "GET",
+      method: "GET"
     });
     var serie2 = $http({
       url: "http://s3.amazonaws.com/logtrust-static/test/test/data2.json",
-      method: "GET",
+      method: "GET"
     });
 
     var serie3 =  $http({
       url: "http://s3.amazonaws.com/logtrust-static/test/test/data3.json",
-      method: "GET",
+      method: "GET"
     });
 
     return $q.all([serie1, serie2, serie3]).then((series) => {
@@ -139,7 +123,6 @@ angular.module('mainApp').factory('seriesCall', ['$http', '$q', function seriesC
 
       dateStructure = Object.keys(categoryStructure).sort(); //get the dateCategoireies sorted
       generateSerieDataByCategory();
-      generateSerieCategory();
       gerenatePieChartDate();
     });
 
@@ -150,10 +133,7 @@ angular.module('mainApp').factory('seriesCall', ['$http', '$q', function seriesC
   };
 
   var getSeriesStructure = function(){
-    return  {
-      categories: dateStructure,
-      series: seriesStructure
-    }
+    return seriesStructure;
   };
 
   return {
